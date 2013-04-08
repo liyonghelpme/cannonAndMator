@@ -3,6 +3,7 @@
 #include "cmath"
 #include "kazmath/utility.h"
 
+
 Line *Line::create(const char *fileName, kmVec3 &a, kmVec3 &b, float thickness, float deg, ccColor3B c, kmVec3 &temp, Lightning *lightning)
 {
     Line *line = new Line();

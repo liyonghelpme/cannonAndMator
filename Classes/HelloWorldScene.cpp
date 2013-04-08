@@ -4,6 +4,7 @@
 #include "Bomb.h"
 #include "Cannon.h"
 #include "Background.h"
+#include "Shell.h"
 //#include "Range.h"
 
 USING_NS_CC;
@@ -33,6 +34,10 @@ bool HelloWorld::init()
     {
         return false;
     }
+
+    setTouchEnabled(true);
+    setTouchPriority(1);
+    setTouchMode(kCCTouchesOneByOne);
 
     //resourceSize / designSize
     CCDirector::sharedDirector()->setContentScaleFactor(1.0);
@@ -66,51 +71,14 @@ bool HelloWorld::init()
     Background *bk = Background::create();
     addChild(bk);
     
-    //Cannon *cannon = Cannon::create();
-    //addChild(cannon);
-    //cannon->setPosition(ccp(400, 240));
+    Cannon *cannon = Cannon::create();
+    addChild(cannon);
+    cannon->setPosition(ccp(400, 240));
 
-    //Range *range = Range::create();
-    //addChild(range);
+    shell = Shell::create();
+    addChild(shell);
+    shell->setPosition(ccp(100, 100));
 
-    CCSprite *sp;
-    ccBlendFunc src = {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA};
-
-    sp = CCSprite::create("range_circle.png");
-    //sp->setScaleY(0.8);
-    sp->setPosition(ccp(50, 50));
-
-    sp->setBlendFunc(src);
-    sp->getTexture()->generateMipmap();
-    ccTexParams texParams = { GL_LINEAR_MIPMAP_LINEAR, GL_NEAREST_MIPMAP_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE };    
-    sp->getTexture()->setTexParameters(&texParams);
-
-    sp->setScale(0.2);
-
-    addChild(sp);
-
-    sp = CCSprite::create("range_circle.png");
-    //sp->setScaleY(0.8);
-    sp->setPosition(ccp(100, 100));
-    sp->setBlendFunc(src);
-    sp->setScale(0.5);
-    addChild(sp);
-
-    sp = CCSprite::create("range_circle.png");
-    //sp->setScaleY(0.8);
-    sp->setPosition(ccp(200, 200));
-    sp->setBlendFunc(src);
-    sp->setScale(1);
-    addChild(sp);
-
-    sp = CCSprite::create("range_circle.png");
-    //sp->setScaleY(0.8);
-    sp->setPosition(ccp(400, 300));
-    sp->setBlendFunc(src);
-    sp->setScale(2);
-    sp->setOpacity(200); //设定alpha 
-
-    addChild(sp);
 
 
     return true;
@@ -124,4 +92,15 @@ void HelloWorld::menuCloseCallback(CCObject* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     exit(0);
 #endif
+}
+
+bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
+    return true;
+}
+
+void HelloWorld::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {   
+    shell->strike->setPosition(pTouch->getLocation());
+}
+
+void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {
 }
