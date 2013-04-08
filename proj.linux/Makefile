@@ -31,7 +31,8 @@ OBJECTS = ./main.o \
         ../Classes/Cannon.o \
         ../Classes/Background.o \
         ../Classes/Range.o \
-		../Classes/Shell.o
+		../Classes/Shell.o \
+		../Classes/Mortar.o
 
 LBITS := $(shell getconf LONG_BIT)
 ifeq ($(LBITS),64)

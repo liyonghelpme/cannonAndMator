@@ -5,6 +5,7 @@
 #include "Cannon.h"
 #include "Background.h"
 #include "Shell.h"
+#include "Mortar.h"
 //#include "Range.h"
 
 USING_NS_CC;
@@ -75,11 +76,16 @@ bool HelloWorld::init()
     addChild(cannon);
     cannon->setPosition(ccp(400, 240));
 
-    shell = Shell::create();
+    /*
+    shell = Shell::create(10);
     addChild(shell);
-    shell->setPosition(ccp(100, 100));
+    shell->setPosition(ccp(300, 200));
+    */
 
 
+    Mortar *mortar = Mortar::create();
+    mortar->setPosition(ccp(300, 200));
+    addChild(mortar);
 
     return true;
 }
@@ -99,7 +105,7 @@ bool HelloWorld::ccTouchBegan(CCTouch *pTouch, CCEvent *pEvent) {
 }
 
 void HelloWorld::ccTouchMoved(CCTouch *pTouch, CCEvent *pEvent) {   
-    shell->strike->setPosition(pTouch->getLocation());
+    //shell->setPosition(pTouch->getLocation());
 }
 
 void HelloWorld::ccTouchEnded(CCTouch *pTouch, CCEvent *pEvent) {

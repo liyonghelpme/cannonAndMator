@@ -5,7 +5,7 @@
 using namespace cocos2d;
 class Shell : public CCNode {
 public:
-    static Shell *create();
+    static Shell *create(float );
     void init();
     virtual void update(float dt);
 
@@ -24,9 +24,26 @@ public:
     float radius;
     float picWidth;
     virtual void setPosition(const CCPoint &);
+    virtual const CCPoint& getPosition();
+
+    void setRealPosition(const CCPoint& newPosition);
+
+    float lifeTime;
+    void setRadius(float r);
+
+    CCParticleSystemQuad *bombStart(CCPoint&, float dir, float time);
+    void bombFly(CCPoint& start, CCPoint& end, float time);
+    void bombEnd(CCPoint& end);
 
 private:
     float passTime;
     float lightTime;
+    float countLife;
+
+    CCNode *ball;
+    float scaleForBall;
+
+    ccColor3B bombColor;
+    int state;
 };
 #endif
