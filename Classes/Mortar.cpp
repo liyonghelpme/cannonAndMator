@@ -11,6 +11,12 @@ void Mortar::init() {
     setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
     scheduleUpdate();
 }
+//大炮3个状态
+//聚集能量
+//发射炮弹
+//炮弹爆炸
+
+//setRadius 可以设定发射炮弹的尺寸大小
 void Mortar::update(float dt) {
     passTime += dt;
     if(state == 0) {
@@ -27,7 +33,7 @@ void Mortar::update(float dt) {
 
             shell = Shell::create(1);
             getParent()->addChild(shell); 
-            shell->setRadius(16);
+            shell->setRadius(20);
             shell->setPosition(d);
             shell->bombStart(d, dir, 1.0);
             

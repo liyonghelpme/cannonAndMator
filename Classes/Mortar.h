@@ -4,6 +4,7 @@
 #include "Shell.h"
 using namespace cocos2d;
 
+//大炮
 class Mortar : public CCNode {
 public:
     static Mortar *create();

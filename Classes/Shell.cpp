@@ -132,6 +132,8 @@ const CCPoint &Shell::getPosition() {
     return ball->getPosition();
 }
 
+//产生聚集的能量流
+//默认已经产生一个能量球
 CCParticleSystemQuad *Shell::bombStart(CCPoint &pos, float dir, float time){
     printf("bombStart\n");
     CCParticleSystemQuad *p = CCParticleSystemQuad::createWithTotalParticles(40);
@@ -168,15 +170,19 @@ CCParticleSystemQuad *Shell::bombStart(CCPoint &pos, float dir, float time){
     p->setEndColorVar(ccc4f(0.1, 0.1, 0.1, 0.0));
 
     p->setBlendAdditive(true);
-    CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage("circle2.png");
+    CCTexture2D *pTexture = CCTextureCache::sharedTextureCache()->addImage("shell.png");
     p->setTexture(pTexture);
 
     this->addChild(p);
     return p;
 }
+//能量球 中有闪电包含 飞行
 void Shell::bombFly(CCPoint &start, CCPoint &end, float flyTime) {
     ball->runAction(CCMoveTo::create(flyTime, end));
 }
+
+//能量球爆炸
+//可以设定闪电的尺寸 和 能量球的尺寸
 void Shell::bombEnd(CCPoint &end) {
     state = 1;
     passTime = 0;
@@ -217,8 +223,8 @@ void Shell::bombEnd(CCPoint &end) {
     for(int i = 0; i < leftNum; i++) {
         float rl = (random()%10000/10000.*radius/2+radius/2);
 
-        float dx = cos(deg+difDeg*i)*rl*4;
-        float dy = sin(deg+difDeg*i)*rl*4;
+        float dx = cos(deg+difDeg*i)*rl*3;
+        float dy = sin(deg+difDeg*i)*rl*3;
 
         float mx = cos(deg+difDeg*i)*rl*5;
         float my = sin(deg+difDeg*i)*rl*5;

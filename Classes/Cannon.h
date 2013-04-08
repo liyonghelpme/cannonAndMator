@@ -11,6 +11,7 @@ typedef enum {
     BOMB,
 } CANNON_STATE;
 
+//小炮
 class Cannon : public CCNode {
 public:
     Cannon();
