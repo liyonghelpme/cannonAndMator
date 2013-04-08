@@ -134,6 +134,7 @@ const CCPoint &Shell::getPosition() {
 
 //产生聚集的能量流
 //默认已经产生一个能量球
+//可以增加 粒子数量  以及 发射率 来增强汇聚效果
 CCParticleSystemQuad *Shell::bombStart(CCPoint &pos, float dir, float time){
     printf("bombStart\n");
     CCParticleSystemQuad *p = CCParticleSystemQuad::createWithTotalParticles(40);
