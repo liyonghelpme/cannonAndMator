@@ -9,6 +9,7 @@ MyParticle *MyParticle::create() {
 //飞起的气泡主要是 初始速度 和 重力
 //控制运动时间 和 运动位移
 //调整速度 和 重力
+//速度/重力 = 运动时间
 
 //运动时间 2s 最高点 1s
 //初始速度 200 加速度 200
@@ -74,18 +75,19 @@ void Splash::init() {
     go = true;
 }
 
+//调整Y 方向的 随机性 增强 涌出来的效果
 void Splash::update(float dt) {
     passTime += dt;
     if(passTime >= 1.0) {
         for(int i = 0; i < 20; i++) {
             MyParticle *p = MyParticle::create();
             float rw = random()%10000/10000.*10;
-            float rh = random()%10000/10000.*10;
+            float rh = random()%10000/10000.*100;
             p->setPosition(ccp(100+rw, 150+rh));
             addChild(p);
             float rx = random()%10000/10000.*200-100;
             //float rx = 200;
-            float ry = random()%10000/10000.*100+200;
+            float ry = random()%10000/10000.*100+300;
             kmVec2Fill(&p->velocity, rx, ry);
 
 

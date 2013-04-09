@@ -11,6 +11,9 @@
 #include "Splash.h"
 #include "Tin.h"
 #include "FoodFactory.h"
+#include "Gun.h"
+#include "Gunner.h"
+#include "Shoot.h"
 
 //#include "Range.h"
 
@@ -109,6 +112,21 @@ bool HelloWorld::init()
 
     FoodFactory *food = FoodFactory::create();
     addChild(food);
+
+    /*
+    Gun *gun = Gun::create();
+    addChild(gun);
+    gun->setPosition(ccp(400, 200));
+    */
+
+
+    Gunner *gunner = Gunner::create();
+    addChild(gunner);
+    gunner->setPosition(ccp(500, 200));
+
+    Shoot *shoot = Shoot::create();
+    addChild(shoot);
+    shoot->setPosition(ccp(600, 300));
     return true;
 }
 
