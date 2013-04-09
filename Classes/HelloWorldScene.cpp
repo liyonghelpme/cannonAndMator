@@ -6,6 +6,9 @@
 #include "Background.h"
 #include "Shell.h"
 #include "Mortar.h"
+#include "Water.h"
+#include "Level.h"
+#include "Splash.h"
 //#include "Range.h"
 
 USING_NS_CC;
@@ -86,6 +89,14 @@ bool HelloWorld::init()
     Mortar *mortar = Mortar::create();
     mortar->setPosition(ccp(300, 200));
     addChild(mortar);
+
+
+
+    Level *level = Level::create();
+    addChild(level);
+
+    Splash *s = Splash::create();
+    addChild(s);
 
     return true;
 }
