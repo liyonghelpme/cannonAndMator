@@ -32,8 +32,10 @@ void Shell::init() {
     scaleForBall = 1.0;
 
 
-    strike = CCMotionStreak::create(1.0f, 64.0f, 64., bombColor, "circle2.png");
-    strike->retain();
+    //strike 没有起作用为什么？
+    strike = CCMotionStreak::create(1.0f, 8.0f, 32., bombColor, "circle2.png");
+    //strike->retain();
+    addChild(strike);
 
     scheduleUpdate();
     
@@ -126,7 +128,7 @@ Shell::~Shell() {
     array->release();
     lightnings->release();
     trails->release();
-    strike->release();
+    //strike->release();
 }
 const CCPoint &Shell::getPosition() {
     return ball->getPosition();
@@ -179,7 +181,10 @@ CCParticleSystemQuad *Shell::bombStart(CCPoint &pos, float dir, float time){
 }
 //能量球 中有闪电包含 飞行
 void Shell::bombFly(CCPoint &start, CCPoint &end, float flyTime) {
-    ball->runAction(CCMoveTo::create(flyTime, end));
+    //ball->runAction(CCMoveTo::create(flyTime, end));
+    //strike
+    runAction(CCMoveTo::create(flyTime, end));
+    //strike->runAction(CCMoveTo::create(flyTime, end));
 }
 
 //能量球爆炸
