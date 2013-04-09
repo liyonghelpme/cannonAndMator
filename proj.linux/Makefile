@@ -35,7 +35,9 @@ OBJECTS = ./main.o \
 		../Classes/Mortar.o \
 		../Classes/Water.o \
 		../Classes/Level.o \
-		../Classes/Splash.o
+		../Classes/Splash.o \
+		../Classes/Tin.o \
+		../Classes/FoodFactory.o
 
 LBITS := $(shell getconf LONG_BIT)
 ifeq ($(LBITS),64)

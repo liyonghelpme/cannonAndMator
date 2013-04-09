@@ -9,6 +9,9 @@
 #include "Water.h"
 #include "Level.h"
 #include "Splash.h"
+#include "Tin.h"
+#include "FoodFactory.h"
+
 //#include "Range.h"
 
 USING_NS_CC;
@@ -98,6 +101,14 @@ bool HelloWorld::init()
     Splash *s = Splash::create();
     addChild(s);
 
+    /*
+    Tin *tin = Tin::create();
+    addChild(tin);
+    tin->setPosition(ccp(300, 300));
+    */
+
+    FoodFactory *food = FoodFactory::create();
+    addChild(food);
     return true;
 }
 
