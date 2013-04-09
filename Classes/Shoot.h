@@ -1,6 +1,7 @@
 #ifndef __Shoot_H__
 #define __Shoot_H__
 #include "cocos2d.h"
+#include "Bullet.h"
 using namespace cocos2d;
 
 class Shoot : public CCNode {
@@ -13,5 +14,6 @@ private:
     CCSprite *ani;
     float passTime;
     int curFrame;
+    Bullet *bullet;
 };
 #endif

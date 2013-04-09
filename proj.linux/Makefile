@@ -41,6 +41,7 @@ OBJECTS = ./main.o \
 		../Classes/Gun.o \
 		../Classes/Gunner.o \
 		../Classes/Shoot.o \
+		../Classes/Bullet.o \
 
 LBITS := $(shell getconf LONG_BIT)
 ifeq ($(LBITS),64)

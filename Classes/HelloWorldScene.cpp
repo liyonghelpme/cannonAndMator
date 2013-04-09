@@ -14,6 +14,7 @@
 #include "Gun.h"
 #include "Gunner.h"
 #include "Shoot.h"
+#include "Bullet.h"
 
 //#include "Range.h"
 
@@ -124,9 +125,17 @@ bool HelloWorld::init()
     addChild(gunner);
     gunner->setPosition(ccp(500, 200));
 
+    //机枪火光
     Shoot *shoot = Shoot::create();
     addChild(shoot);
     shoot->setPosition(ccp(600, 300));
+
+
+    /*
+    Bullet *b = Bullet::create();
+    addChild(b);
+    b->setPosition(ccp(550, 200));
+    */
     return true;
 }
 

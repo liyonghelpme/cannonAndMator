@@ -11,6 +11,10 @@ bool Shoot::init() {
     ani->setAnchorPoint(ccp(0.5, 0));
     passTime = 0;
     curFrame = 0;
+    bullet = Bullet::create();
+    addChild(bullet);
+    bullet->setScale(0.5);
+
     scheduleUpdate();
     return true;
 }
