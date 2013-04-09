@@ -20,13 +20,22 @@ bool MyParticle::init() {
     kmVec2Fill(&velocity, 0, 0);
     lifeTime = 1+random()%10000/10000.*0.5;
     passTime = 0;
-    //ccBlendFunc f = {GL_ONE, GL_ONE};
-    //setBlendFunc(f);
-    setColor(ccc3(50, 128, 255));
 
+    //setBlendFunc(f);
+
+    setColor(ccc3(50, 128, 255));
     float sca = random()%10000/10000.*0.5+0.5;
     setScale(sca*.5);
     runAction(CCFadeOut::create(lifeTime));
+
+    ccBlendFunc f = {GL_ONE, GL_ONE};
+    CCSprite *meta = CCSprite::create("newWater.png");
+    addChild(meta);
+    meta->setBlendFunc(f);
+    meta->setColor(ccc3(50, 128, 255));
+    CCSize sz = getContentSize();
+    meta->setPosition(ccp(sz.width/2, sz.height/2));
+    meta->setScale(3);
 
     scheduleUpdate();
     return true;
@@ -67,7 +76,7 @@ void Splash::init() {
 
 void Splash::update(float dt) {
     passTime += dt;
-    if(passTime >= 1.0 && go) {
+    if(passTime >= 1.0) {
         for(int i = 0; i < 20; i++) {
             MyParticle *p = MyParticle::create();
             float rw = random()%10000/10000.*10;
