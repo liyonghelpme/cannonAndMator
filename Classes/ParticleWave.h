@@ -4,14 +4,21 @@
 using namespace cocos2d;
 
 
-class ParticleWave : public CCSprite {
+class ParticleWave : public CCNode {
 public:
     virtual bool init();
     static ParticleWave *create();
     virtual void update(float dt);
     ~ParticleWave();
+    CCMotionStreak *tail;
+    virtual void setPosition(const CCPoint &);
+    void bombEnd();
 private:
     CCArray *shadow;
     float passTime;
+
+    CCParticleSun *sun;
+    CCSprite *detail;
+    int state;
 };
 #endif

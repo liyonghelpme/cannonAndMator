@@ -14,6 +14,11 @@ void Shell::init() {
     state = 0;
     bombColor = ccc3(235, 3, 247);
 
+    //strike 没有起作用为什么？
+    strike = CCMotionStreak::create(1.0f, 8.0f, 32., bombColor, "circle2.png");
+    //strike->retain();
+    addChild(strike);
+
     ball = CCNode::create();
     addChild(ball);
 
@@ -32,10 +37,7 @@ void Shell::init() {
     scaleForBall = 1.0;
 
 
-    //strike 没有起作用为什么？
-    strike = CCMotionStreak::create(1.0f, 8.0f, 32., bombColor, "circle2.png");
-    //strike->retain();
-    addChild(strike);
+
 
     scheduleUpdate();
     
