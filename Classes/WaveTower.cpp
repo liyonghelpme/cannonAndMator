@@ -37,46 +37,60 @@ void WaveTower::update(float dt) {
         dir = v*kmPI*2;
         state = 1;
         passTime = 0;
-    } else if(state == 1){
-        CCPoint p = getPosition();
-        float vx = cos(dir); //炮弹口位置
-        float vy = sin(dir); 
-        CCPoint d = ccp(p.x+vx*15, p.y+vy*15);
-        
-        CCPoint e = ccp(p.x+vx*150, p.y+vy*150);
+    } else if(state == 1) {
+        if(passTime >= 1) {
+            CCPoint p = getPosition();
+            float vx = cos(dir)*15; //炮弹口位置
+            float vy = sin(dir)*15; 
+            CCPoint d = ccp(p.x+vx, p.y+vy);
 
-        ccColor3B color = ccc3(162, 10, 0);
-        //ccc4f(0.63, 0.04, 0.06, 1.0)
-        tail = CCMotionStreak::create(1.0f, 8.0f, 32., color, "tail.png");
-        getParent()->addChild(tail);
+            ccColor3B color = ccc3(162, 10, 0);
+            //ccc4f(0.63, 0.04, 0.06, 1.0)
+            tail = CCMotionStreak::create(1.0f, 8.0f, 32., color, "tail.png");
+            getParent()->addChild(tail);
 
-        w = ParticleWave::create();
-        getParent()->addChild(w);
-        w->setPosition(d);
-        w->setScale(0.4);
+            w = ParticleWave::create();
+            getParent()->addChild(w);
+            w->setPosition(d);
+            w->setScale(0.4);
+            
+            //设置定点的尾巴
 
-
-        
-        //设置定点的尾巴
-
-        w->tail = tail;
-
-//CCRotateBy::create(1.0, deg), CCScaleTo::create(1.0, 0.8), 
+            w->tail = tail;
+            
+            w->bombStart(d, dir, 1.0);
+            state = 2;
+            passTime = 0;
+        }
         float deg = random()%10000/10000.180+720;
-        w->runAction(CCSequence::create(CCSpawn::create(CCMoveTo::create(2.0, e), NULL), CCFadeOut::create(1.0), NULL));
-        //tail->runAction(CCMoveTo::create(2.0, e));
+    } else if(state == 2){
+        if(passTime >= 1.0) {
+            CCPoint p = getPosition();
+            float vx = cos(dir); //炮弹口位置
+            float vy = sin(dir); 
+            CCPoint d = ccp(p.x+vx*15, p.y+vy*15);
+            
+            CCPoint e = ccp(p.x+vx*150, p.y+vy*150);
 
-
-        state = 2;
-        passTime = 0;
-    } else if(state == 2) {
-        if(passTime >= 2) {
-            w->bombEnd();
+    //CCRotateBy::create(1.0, deg), CCScaleTo::create(1.0, 0.8), 
+            //float deg = random()%10000/10000.180+720;
+            w->runAction(CCSequence::create(CCSpawn::create(CCMoveTo::create(2.0, e), NULL), CCFadeOut::create(1.0), NULL));
+            //tail->runAction(CCMoveTo::create(2.0, e));
+            w->bombFly(d, e, 1.0);
 
             state = 3;
             passTime = 0;
         }
+
+
     } else if(state == 3) {
+        if(passTime >= 2) {
+            w->bombEnd();
+
+            state = 4;
+            passTime = 0;
+        }
+    } else if(state == 4) {
         if(passTime >= 1) {
             w->removeFromParent();
             tail->removeFromParent();

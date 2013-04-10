@@ -78,6 +78,24 @@ ParticleWave::~ParticleWave() {
     shadow->release();
 }
 
+void ParticleWave::bombStart(CCPoint &pos, float dir, float time) {
+    sun->setStartSize(0);
+    sun->setEndSize(64);
+
+
+    detail->setScale(0);
+    detail->runAction(CCSpawn::create(CCFadeIn::create(1.0), CCScaleTo::create(1.0, 1.0), NULL));
+    for(int i = 0; i < shadow->count(); i++) {
+        CCSprite *sp = (CCSprite*)shadow->objectAtIndex(i);
+        sp->setScale(0);
+        sp->runAction(CCSpawn::create(CCFadeIn::create(1.0), CCScaleTo::create(1.0, 1.0), NULL));
+    }
+}
+
+void ParticleWave::bombFly(CCPoint &start, CCPoint &end, float flyTime) {
+    sun->setStartSize(64);
+    sun->setEndSize(kCCParticleStartSizeEqualToEndSize);
+}
 
 void ParticleWave::bombEnd() {
     state = 1;

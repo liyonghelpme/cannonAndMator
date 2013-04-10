@@ -12,6 +12,8 @@ public:
     ~ParticleWave();
     CCMotionStreak *tail;
     virtual void setPosition(const CCPoint &);
+    void bombStart(CCPoint &, float dir, float time);
+    void bombFly(CCPoint &, CCPoint &, float time);
     void bombEnd();
 private:
     CCArray *shadow;
@@ -20,5 +22,6 @@ private:
     CCParticleSun *sun;
     CCSprite *detail;
     int state;
+
 };
 #endif
