@@ -15,6 +15,7 @@
 #include "Gunner.h"
 #include "Shoot.h"
 #include "Bullet.h"
+#include "ParticleWave.h"
 
 //#include "Range.h"
 
@@ -136,6 +137,10 @@ bool HelloWorld::init()
     addChild(b);
     b->setPosition(ccp(550, 200));
     */
+
+    ParticleWave *particle = ParticleWave::create();
+    addChild(particle);
+    particle->setPosition(ccp(350, 200));
     return true;
 }
 
