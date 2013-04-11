@@ -19,6 +19,7 @@
 #include "WaveTower.h"
 #include "Smoke.h"
 #include "BigSmoke.h"
+#include "BrightBall.h"
 
 //#include "Range.h"
 
@@ -158,6 +159,11 @@ bool HelloWorld::init()
     BigSmoke *bs = BigSmoke::create();
     addChild(bs);
     bs->setPosition(ccp(300, 300));
+
+    BrightBall *ball = BrightBall::create();
+    addChild(ball);
+    ball->setPosition(ccp(200, 300));
+
     return true;
 }
 

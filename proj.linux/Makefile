@@ -46,6 +46,7 @@ OBJECTS = ./main.o \
 		../Classes/WaveTower.o \
 		../Classes/Smoke.o \
 		../Classes/BigSmoke.o \
+		../Classes/BrightBall.o \
 
 
 LBITS := $(shell getconf LONG_BIT)
