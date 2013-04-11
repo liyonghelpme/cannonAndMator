@@ -44,6 +44,9 @@ OBJECTS = ./main.o \
 		../Classes/Bullet.o \
 		../Classes/ParticleWave.o \
 		../Classes/WaveTower.o \
+		../Classes/Smoke.o \
+		../Classes/BigSmoke.o \
+
 
 LBITS := $(shell getconf LONG_BIT)
 ifeq ($(LBITS),64)

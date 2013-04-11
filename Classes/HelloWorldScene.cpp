@@ -17,6 +17,8 @@
 #include "Bullet.h"
 #include "ParticleWave.h"
 #include "WaveTower.h"
+#include "Smoke.h"
+#include "BigSmoke.h"
 
 //#include "Range.h"
 
@@ -147,6 +149,15 @@ bool HelloWorld::init()
     WaveTower *w = WaveTower::create();
     addChild(w);
     w->setPosition(ccp(650, 200));
+
+    Smoke *sm = Smoke::create();
+    addChild(sm);
+    sm->setPosition(ccp(500, 300));
+
+
+    BigSmoke *bs = BigSmoke::create();
+    addChild(bs);
+    bs->setPosition(ccp(300, 300));
     return true;
 }
 
