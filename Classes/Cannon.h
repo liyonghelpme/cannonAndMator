@@ -20,6 +20,7 @@ public:
     virtual void update(float dt);
     static Cannon *create();
     void onEnter();
+    int type;
 private:    
     float dir;
     CANNON_STATE state;

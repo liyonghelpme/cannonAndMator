@@ -164,6 +164,7 @@ bool HelloWorld::init()
     addChild(ball);
     ball->setPosition(ccp(200, 300));
 
+
     return true;
 }
 

@@ -65,6 +65,92 @@ CCParticleSystemQuad *Bomb::bombStart(CCPoint &pos, float dir, float time){
     this->addChild(p);
     return p;
 }
+
+void Bomb::usePic(CCPoint &start, CCPoint &end, float flyTime) {
+    CCSprite *p = CCSprite::create("l0.png");
+    addChild(p);
+    p->setPosition(start);
+
+    removeNode = p;
+
+    CCCallFunc *func = CCCallFunc::create(this, callfunc_selector(Bomb::removeTempNode));
+    p->runAction(CCSequence::create(CCMoveTo::create(flyTime, end), func));
+
+
+    CCSpriteFrameCache *cache = CCSpriteFrameCache::sharedSpriteFrameCache();
+    CCArray *aniFrames = CCArray::create();
+    CCSpriteFrame *frame;
+    CCTexture2D *texture;
+    texture = CCTextureCache::sharedTextureCache()->addImage("l0.png");
+    frame = CCSpriteFrame::createWithTexture(texture, CCRectMake(0, 0,texture->getContentSize().width, texture->getContentSize().height ));
+    aniFrames->addObject(frame);
+
+    texture = CCTextureCache::sharedTextureCache()->addImage("l1.png");
+    frame = CCSpriteFrame::createWithTexture(texture, CCRectMake(0, 0,texture->getContentSize().width, texture->getContentSize().height ));
+    aniFrames->addObject(frame);
+
+    texture = CCTextureCache::sharedTextureCache()->addImage("l2.png");
+    frame = CCSpriteFrame::createWithTexture(texture, CCRectMake(0, 0,texture->getContentSize().width, texture->getContentSize().height ));
+    aniFrames->addObject(frame);
+
+    texture = CCTextureCache::sharedTextureCache()->addImage("l3.png");
+    frame = CCSpriteFrame::createWithTexture(texture, CCRectMake(0, 0,texture->getContentSize().width, texture->getContentSize().height ));
+    aniFrames->addObject(frame);
+
+    texture = CCTextureCache::sharedTextureCache()->addImage("l4.png");
+    frame = CCSpriteFrame::createWithTexture(texture, CCRectMake(0, 0,texture->getContentSize().width, texture->getContentSize().height ));
+    aniFrames->addObject(frame);
+
+
+    CCAnimation *animation = CCAnimation::createWithSpriteFrames(aniFrames, 0.1f);
+    p->runAction(CCRepeatForever::create(CCAnimate::create(animation)));
+}
+
+void Bomb::redBomb(CCPoint &start, CCPoint &end, float flyTime) {
+
+    CCParticleSun *p = CCParticleSun::createWithTotalParticles(20);
+    p->setPositionType(kCCPositionTypeGrouped);
+    p->setPosition(start);
+    p->setSpeed(5);
+    p->setStartColor(ccc4f(0.89, 0.29, 0.28, 1.0));
+    p->setEndColor(ccc4f(0.89, 0.29, 0.28, 1.0));
+
+    CCTexture2D *pt = CCTextureCache::sharedTextureCache()->addImage("newWater.png");
+    p->setTexture(pt);
+
+
+    CCCallFunc *func = CCCallFunc::create(this, callfunc_selector(Bomb::removeTempNode));
+    p->runAction(CCSequence::create(CCMoveTo::create(flyTime, end), func));
+
+    addChild(p);
+
+    removeNode = p;
+}
+void Bomb::removeTempNode() {
+    removeNode->removeFromParent();
+}
+
+void Bomb::yellowBomb(CCPoint &start, CCPoint &end, float flyTime) {
+
+    CCParticleSun *p = CCParticleSun::createWithTotalParticles(20);
+    p->setPositionType(kCCPositionTypeGrouped);
+    p->setPosition(start);
+    p->setSpeed(5);
+
+
+    CCTexture2D *pt = CCTextureCache::sharedTextureCache()->addImage("newWater.png");
+    p->setTexture(pt);
+
+
+    CCCallFunc *func = CCCallFunc::create(this, callfunc_selector(Bomb::removeTempNode));
+    p->runAction(CCSequence::create(CCMoveTo::create(flyTime, end), func));
+
+    addChild(p);
+
+    removeNode = p;
+
+}
+
 /*
     start 飞行开始位置,通常炮口
     end 飞行结束位置，目标位置

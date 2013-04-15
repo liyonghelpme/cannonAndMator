@@ -17,6 +17,7 @@ Cannon::~Cannon() {
 Cannon *Cannon::create() {
     Cannon *pRet = new Cannon();
     pRet->setShaderProgram(CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
+    pRet->type = 0;
     //pRet->setPosition(ccp(400, 240));
     pRet->autorelease();
     return pRet;
@@ -74,7 +75,17 @@ void Cannon::update(float dt) {
             CCPoint d = ccp(p.x+vx*15, p.y+vy*15);
             CCPoint e = ccp(p.x+vx*200, p.y+vy*200);
 
-            bomb->bombFly(d, e, 2);//从起点 飞到目的点 飞行时间 飞行方向 
+            int rad = random()%2;
+            bomb->usePic(d, e, 2);
+            /*
+            if(rad == 0)
+                //bomb->bombFly(d, e, 2);//从起点 飞到目的点 飞行时间 飞行方向 
+                bomb->yellowBomb(d, e, 2);
+            else if(rad == 1)
+                bomb->redBomb(d, e, 2);
+            */
+            
+
             passTime += dt; 
         } else if(passTime < 2.0) { 
             passTime += dt;

@@ -15,8 +15,14 @@ public:
     CCParticleSystemQuad *bombFly(CCPoint &start, CCPoint &end, float flyTime);
     CCParticleSystemQuad *bombEnd(CCPoint &end);
     void removeLaser();
+
+    void redBomb(CCPoint &start, CCPoint &end, float flyTime);
+    void yellowBomb(CCPoint &start, CCPoint &end, float flyTime);
+    void removeTempNode();
+    void usePic(CCPoint&, CCPoint&, float);
 private:
     CCParticleSystem *system;
     CCParticleSystem *laser;
+    CCNode *removeNode;
 };
 #endif
