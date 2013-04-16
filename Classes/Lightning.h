@@ -55,6 +55,7 @@ public:
 
     void makeSubLightning();
 
+    int lightId;
 
 private:
     int count;

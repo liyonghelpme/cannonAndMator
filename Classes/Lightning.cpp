@@ -50,11 +50,12 @@ Lightning *Lightning::create(const char *fileName, unsigned int capacity, float 
     pRet->subLightning = CCArray::create();
     pRet->subLightning->retain();
     pRet->possible = 10;
-    pRet->subDifX = 50;
-    pRet->subDifY = 50;
+    pRet->subDifX = 20;
+    pRet->subDifY = 20;
     pRet->points = CCArray::create();
     pRet->points->retain();
-    pRet->realDis = 100;
+    pRet->realDis = 50;
+    pRet->lightId = 0;
 
     pRet->autorelease();
     return pRet;
@@ -83,7 +84,17 @@ void Lightning::update(float delta)
             p = (CCNode*)lines->objectAtIndex(count+2);
             p->setVisible(true);
 
+            int pId = count/3;
+            for(int i = 0; i < subLightning->count(); i++) {
+                Lightning *l = (Lightning*)subLightning->objectAtIndex(i);
+                if(l->lightId == pId) {
+                    getParent()->addChild(l);
+                    break;
+                }
+            }
             count += 3;
+
+            
         } else {
             type = 0; 
         }
@@ -224,11 +235,12 @@ void Lightning::makeSubLightning() {
                 float y1 = po->y;
                 CCLog("sub lightning");
                 Lightning *sl = Lightning::create(NULL, 100, 10.0, 10.0, 20.0);
-                getParent()->addChild(sl);
+                //getParent()->addChild(sl);
                 sl->type = 1;
                 float dx = random()%10000/10000.*subDifX;
                 float dy = random()%10000/10000.*subDifY;
                 sl->midDisplacement(x1, y1, realEnd.x+dx, realEnd.y+dy, realDis);
+                sl->lightId = i;
 
                 subLightning->addObject(sl);
             }

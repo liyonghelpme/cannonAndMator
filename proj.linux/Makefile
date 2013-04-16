@@ -25,30 +25,21 @@ DEFINES = -DLINUX
 
 OBJECTS = ./main.o \
         ../Classes/AppDelegate.o \
-        ../Classes/HelloWorldScene.o \
+        ../Classes/LightScene.o \
         ../Classes/Lightning.o \
-        ../Classes/Bomb.o \
-        ../Classes/Cannon.o \
-        ../Classes/Background.o \
-        ../Classes/Range.o \
-		../Classes/Shell.o \
-		../Classes/Mortar.o \
-		../Classes/Water.o \
-		../Classes/Level.o \
-		../Classes/Splash.o \
-		../Classes/Tin.o \
-		../Classes/FoodFactory.o \
-		../Classes/Gun.o \
-		../Classes/Gunner.o \
-		../Classes/Shoot.o \
-		../Classes/Bullet.o \
-		../Classes/ParticleWave.o \
-		../Classes/WaveTower.o \
-		../Classes/Smoke.o \
-		../Classes/BigSmoke.o \
-		../Classes/BrightBall.o \
 		../Classes/LightningTower.o \
-
+#        ../Classes/Bomb.o \
+#        ../Classes/Cannon.o \
+#        ../Classes/Background.o \
+#        ../Classes/Range.o \
+#		../Classes/SpaceBack.o \
+#		../Classes/Planet.o \
+#		../Classes/Ship.o \
+#		../Classes/Number.o \
+#		../Classes/Arrow.o \
+#		../Classes/WelcomeScene.o \
+#		../Classes/FailOrWin.o \
+#		../Classes/shape.o
 
 LBITS := $(shell getconf LONG_BIT)
 ifeq ($(LBITS),64)

@@ -21,11 +21,11 @@ void LightningTower::update(float dt) {
         lightning->type = 1;
         lightning->needSub = true;
         lightning->subMax = 10;
-        lightning->possible = 5;
+        lightning->possible = 10;
         lightning->realEnd = ccp(600, 200);
         
         //CCLog("mid displace ment");
-        lightning->midDisplacement(100, 200, 600, 200, 100.0);
+        lightning->midDisplacement(420, 320, 600, 200, 100.0);
         lightning->makeSubLightning();
         
         CCLog("delay");
