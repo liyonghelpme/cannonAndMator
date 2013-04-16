@@ -68,26 +68,31 @@ void Shell::update(float dt) {
             array->addObject(sp);
         }
 
-        lightTime += dt;
-        if(lightTime >= 0.2 && lightnings->count() <= 3) {
-            int leftNum = 6 - lightnings->count();
+        //lightTime += dt;
+        //lightTime >= 0.2 && 
+        if(lightnings->count() <= 6) {
+            //int leftNum = 6 - lightnings->count();
+            int leftNum = 1;
             float difDeg = M_PI*2/leftNum;
 
             float deg = random()%10000/10000.;
             deg = deg*M_PI*2;
 
             for(int i = 0; i < leftNum; i++) {
-                float rl = (random()%10000/10000.*radius/2+radius/2)*0.8;
+                float rl = (random()%10000/10000.*radius/2+radius/2);
 
-                float dx = cos(deg+difDeg*i)*rl;
-                float dy = sin(deg+difDeg*i)*rl;
+                float sx = (random()%10000/10000.*2-1)*rl*0.8;
+                float sy = (random()%10000/10000.*2-1)*rl*0.8;
+                float dx = cos(deg+difDeg*i)*rl*0.4;
+                float dy = sin(deg+difDeg*i)*rl*0.4;
 
                 Lightning *light = Lightning::create(NULL, 20, 10, 40, 10);
-                light->midDisplacement(0, 0, dx, dy, 20);
+                light->type = 1;
+                light->midDisplacement(sx, sy, sx+dx, sy+dy, 20);
                 ball->addChild(light, -1);
                  
                 lightnings->addObject(light);
-                light->runAction(CCSequence::create(CCDelayTime::create(0.5), CCCallFunc::create(this, callfunc_selector(Shell::removeLight)) , NULL));
+                light->runAction(CCSequence::create(CCDelayTime::create(0.3), CCCallFunc::create(this, callfunc_selector(Shell::removeLight)) , NULL));
             }
 
             lightTime -= 0.2;
@@ -231,18 +236,23 @@ void Shell::bombEnd(CCPoint &end) {
     for(int i = 0; i < leftNum; i++) {
         float rl = (random()%10000/10000.*radius/2+radius/2);
 
-        float dx = cos(deg+difDeg*i)*rl*3;
-        float dy = sin(deg+difDeg*i)*rl*3;
 
-        float mx = cos(deg+difDeg*i)*rl*5;
-        float my = sin(deg+difDeg*i)*rl*5;
+        float sx = cos(deg+difDeg*i)*rl*1;
+        float sy = sin(deg+difDeg*i)*rl*1;
+
+        float dx = cos(deg+difDeg*i)*rl*1.5;
+        float dy = sin(deg+difDeg*i)*rl*1.5;
+
+        float mx = cos(deg+difDeg*i)*rl*3;
+        float my = sin(deg+difDeg*i)*rl*3;
 
         Lightning *light = Lightning::create(NULL, 20, 10, 40, 10);
-        light->midDisplacement(0, 0, dx, dy, 20);
+        light->type = 1;
+        light->midDisplacement(sx, sy, dx, dy, 20);
         ball->addChild(light, -1);
          
         lightnings->addObject(light);
-        light->runAction(CCSequence::create(CCMoveBy::create(1.0, ccp(mx, my)) , NULL));
+        light->runAction(CCSequence::create(CCMoveBy::create(0.3, ccp(mx, my)) , NULL));
     }
 
 }

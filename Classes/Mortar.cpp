@@ -48,7 +48,7 @@ void Mortar::update(float dt) {
             float vy = sin(dir); 
             CCPoint d = ccp(p.x+vx*15, p.y+vy*15);
             CCPoint e = ccp(p.x+vx*200, p.y+vy*200);
-            shell->bombFly(d, e, 1.0);
+            shell->bombFly(d, e, 5.0);
             /*
             ccBezierConfig conf;
 
@@ -63,7 +63,7 @@ void Mortar::update(float dt) {
             passTime = 0;
         }
     } else if(state == 3) {
-        if(passTime >= 1) {
+        if(passTime >= 5.) {
             state = 4;
             passTime = 0;
 

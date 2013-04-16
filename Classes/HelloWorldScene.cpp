@@ -20,6 +20,7 @@
 #include "Smoke.h"
 #include "BigSmoke.h"
 #include "BrightBall.h"
+#include "LightningTower.h"
 
 //#include "Range.h"
 
@@ -72,11 +73,17 @@ bool HelloWorld::init()
     printf("winSize %f, %f, %f, %f, %f, %f, %f\n", winSize.width, winSize.height, winPixle.width, winPixle.height, contentScalor, visibleSize.width, visibleSize.height);
 
     
+    /*
     Lightning *lightning = Lightning::create(NULL, 100, 10.0, 10.0, 20.0);
+    lightning->type = 1;
+    addChild(lightning);
     lightning->midDisplacement(0, 160, 480, 160, 100.0);
+    */
+
+
     //lightning->testLine(300 ,400, 50, 200);
     //lightning->testLine(50 ,200, 300, 400);
-    this->addChild(lightning);
+    //this->addChild(lightning);
     //lightning->runAction(CCFadeOut::create(2));
 
     //Layer3d *layer3d = Layer3d::create();
@@ -164,6 +171,10 @@ bool HelloWorld::init()
     addChild(ball);
     ball->setPosition(ccp(200, 300));
 
+
+    LightningTower *lt = LightningTower::create();
+    lt->setPosition(ccp(0, 0));
+    addChild(lt);
 
     return true;
 }

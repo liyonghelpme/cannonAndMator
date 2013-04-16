@@ -30,6 +30,10 @@ Line *Line::create(const char *fileName, kmVec3 &a, kmVec3 &b, float thickness, 
 Lightning *Lightning::create(const char *fileName, unsigned int capacity, float detail, float thickness, float displace)//根据details 来设定sprite的容量
 {
     Lightning *pRet = new Lightning();
+    pRet->subMax = 0;
+    pRet->needSub = false;
+    pRet->type = 0;
+    pRet->count = 0;
     pRet->initWithFile("edge.png", capacity);
     pRet->fileName = "edge.png";
     pRet->lines = CCArray::create();
@@ -43,25 +47,57 @@ Lightning *Lightning::create(const char *fileName, unsigned int capacity, float 
     pRet->fadeOutRate = 3.3f;
     pRet->color = ccc3(0.2*255, 0.2*255, 0.7*255);
     pRet->scheduleUpdate();
+    pRet->subLightning = CCArray::create();
+    pRet->subLightning->retain();
+    pRet->possible = 10;
+    pRet->subDifX = 50;
+    pRet->subDifY = 50;
+    pRet->points = CCArray::create();
+    pRet->points->retain();
+    pRet->realDis = 100;
 
     pRet->autorelease();
     return pRet;
 }
 void Lightning::update(float delta)
 {
-    alpha -= fadeOutRate*delta;
-    CCArray *children = getChildren();
-    CCObject *pObject;
-    CCARRAY_FOREACH(children, pObject)
-    {
-        CCSprite *sp = (CCSprite *)pObject;
-        ccColor3B c = {color.r*alpha, color.g*alpha, color.b*alpha};
-        sp->setColor(c);
+    if(type == 0) {
+        alpha -= fadeOutRate*delta;
+        CCArray *children = getChildren();
+        CCObject *pObject;
+        CCARRAY_FOREACH(children, pObject)
+        {
+            CCSprite *sp = (CCSprite *)pObject;
+            ccColor3B c = {color.r*alpha, color.g*alpha, color.b*alpha};
+            sp->setColor(c);
+        }
+    } else if(type == 1) {
+        if(count < lines->count()) {
+            CCNode *p;
+            p = (CCNode*)lines->objectAtIndex(count);
+            p->setVisible(true);
+
+            p = (CCNode*)lines->objectAtIndex(count+1);
+            p->setVisible(true);
+
+            p = (CCNode*)lines->objectAtIndex(count+2);
+            p->setVisible(true);
+
+            count += 3;
+        } else {
+            type = 0; 
+        }
     }
 }
 Lightning::~Lightning()
 {
     lines->release();
+    for(int i = 0; i < subLightning->count(); i++) {
+        CCNode *p = (CCNode*)subLightning->objectAtIndex(i);
+        p->removeFromParent();
+    }
+    subLightning->release();
+    points->release();
 }
 void Lightning::testLine(float x1, float y1, float x2, float y2)
 {
@@ -131,6 +167,9 @@ void Lightning::midDisplacement(float x1, float y1, float x2, float y2, float di
 
         Line *line = Line::create(this->fileName.c_str(), a, b, thickness, deg, c, temp, this);
         addChild(line);
+        if(type == 1)
+            line->setVisible(false);
+        lines->addObject(line);
 
         CCSprite *s = CCSprite::create(fileName.c_str());
         s->setAnchorPoint(ccp(1.0, 0.5));
@@ -139,6 +178,9 @@ void Lightning::midDisplacement(float x1, float y1, float x2, float y2, float di
         s->setScale(thickness/128);
         s->setColor(c);
         addChild(s);
+        if(type == 1)
+            s->setVisible(false);
+        lines->addObject(s);
 
         s = CCSprite::create(fileName.c_str());
         s->setAnchorPoint(ccp(0, 0.5));
@@ -148,6 +190,18 @@ void Lightning::midDisplacement(float x1, float y1, float x2, float y2, float di
         s->setScale(thickness/128);
         s->setColor(c);
         addChild(s);
+        if(type == 1) 
+            s->setVisible(false);
+        lines->addObject(s);
+
+        //what's possibility?
+        PointObject *point = new PointObject();
+        point->autorelease();
+        point->x = x1;
+        point->y = y1;
+        points->addObject(point);
+
+
 
     }else {
         float midX = (x1+x2)/2;
@@ -155,6 +209,29 @@ void Lightning::midDisplacement(float x1, float y1, float x2, float y2, float di
         midX += (random()*1.0/RAND_MAX-0.5)*dis;
         midY += (random()*1.0/RAND_MAX-0.5)*dis;
         midDisplacement(x1, y1, midX, midY, dis/2);
-        midDisplacement(x2, y2, midX, midY, dis/2);
+        midDisplacement(midX, midY, x2, y2,  dis/2);
+
+    }
+}
+void Lightning::makeSubLightning() {
+    for(int i = 0; i < points->count(); i++) {
+        if(needSub && subLightning->count() < subMax) {
+            int rd = random()%possible;
+
+            if(rd == 0) {
+                PointObject *po = (PointObject*)points->objectAtIndex(i);
+                float x1 = po->x;
+                float y1 = po->y;
+                CCLog("sub lightning");
+                Lightning *sl = Lightning::create(NULL, 100, 10.0, 10.0, 20.0);
+                getParent()->addChild(sl);
+                sl->type = 1;
+                float dx = random()%10000/10000.*subDifX;
+                float dy = random()%10000/10000.*subDifY;
+                sl->midDisplacement(x1, y1, realEnd.x+dx, realEnd.y+dy, realDis);
+
+                subLightning->addObject(sl);
+            }
+        }
     }
 }

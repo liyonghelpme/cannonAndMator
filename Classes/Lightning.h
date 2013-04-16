@@ -24,6 +24,11 @@ public:
     static Line *create(const char *fileName, kmVec3 &a, kmVec3 &b, float thickness, float deg, ccColor3B c, kmVec3 &temp, Lightning *lightning);
 };
 
+class PointObject : public CCObject {
+public:
+    float x, y;
+};
+
 class Lightning : public CCSpriteBatchNode
 {
 public:
@@ -35,9 +40,28 @@ public:
     virtual void update(float delta);
 
 
+    //type 0 立即出现
+    //type 1 运动出现
+    int type;
+    bool needSub;
+    int subMax;
+    int possible;//子闪电的概率
+
+    CCPoint realEnd; //记录真实的最后定点 随机偏移
+
+    float subDifX;
+    float subDifY;
+    float realDis;
+
+    void makeSubLightning();
+
+
 private:
+    int count;
 
     CCArray *lines;
+    CCArray *subLightning;
+
 
     float detail; //闪电的分段长度
     float thickness; //闪电的粗细
@@ -47,5 +71,8 @@ private:
     float fadeOutRate;
 
     string fileName;
+
+    CCArray *points;
+
 };
 #endif
