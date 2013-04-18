@@ -79,10 +79,15 @@ bool HelloWorld::init()
     this->addChild(lightning);
     //lightning->runAction(CCFadeOut::create(2));
 
+    CCSprite *back = CCSprite::create("b0.png");
+    addChild(back);
+    back->setAnchorPoint(ccp(0, 0));
+
     //Layer3d *layer3d = Layer3d::create();
     //this->addChild(layer3d);
     //Bomb *bomb = Bomb::create();
     //addChild(bomb);
+    /*
 
     Background *bk = Background::create();
     addChild(bk);
@@ -90,6 +95,7 @@ bool HelloWorld::init()
     Cannon *cannon = Cannon::create();
     addChild(cannon);
     cannon->setPosition(ccp(400, 240));
+    */
 
     /*
     shell = Shell::create(10);
@@ -98,6 +104,7 @@ bool HelloWorld::init()
     */
 
 
+    /*
     Mortar *mortar = Mortar::create();
     mortar->setPosition(ccp(300, 200));
     addChild(mortar);
@@ -110,14 +117,18 @@ bool HelloWorld::init()
     Splash *s = Splash::create();
     addChild(s);
 
+    */
+
     /*
     Tin *tin = Tin::create();
     addChild(tin);
     tin->setPosition(ccp(300, 300));
     */
 
+    /*
     FoodFactory *food = FoodFactory::create();
     addChild(food);
+    */
 
     /*
     Gun *gun = Gun::create();
@@ -125,6 +136,7 @@ bool HelloWorld::init()
     gun->setPosition(ccp(400, 200));
     */
 
+    /*
 
     Gunner *gunner = Gunner::create();
     addChild(gunner);
@@ -135,6 +147,7 @@ bool HelloWorld::init()
     addChild(shoot);
     shoot->setPosition(ccp(600, 300));
 
+    */
 
     /*
     Bullet *b = Bullet::create();
@@ -142,6 +155,7 @@ bool HelloWorld::init()
     b->setPosition(ccp(550, 200));
     */
 
+    /*
     ParticleWave *particle = ParticleWave::create();
     addChild(particle);
     particle->setPosition(ccp(350, 200));
@@ -150,6 +164,7 @@ bool HelloWorld::init()
     WaveTower *w = WaveTower::create();
     addChild(w);
     w->setPosition(ccp(650, 200));
+    */
 
     Smoke *sm = Smoke::create();
     addChild(sm);
@@ -160,9 +175,11 @@ bool HelloWorld::init()
     addChild(bs);
     bs->setPosition(ccp(300, 300));
 
+    /*
     BrightBall *ball = BrightBall::create();
     addChild(ball);
     ball->setPosition(ccp(200, 300));
+    */
 
 
     return true;
