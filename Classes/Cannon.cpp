@@ -76,7 +76,7 @@ void Cannon::update(float dt) {
             CCPoint e = ccp(p.x+vx*200, p.y+vy*200);
 
             int rad = random()%2;
-            bomb->usePic(d, e, 2);
+            //bomb->usePic(d, e, 2);
             /*
             if(rad == 0)
                 //bomb->bombFly(d, e, 2);//从起点 飞到目的点 飞行时间 飞行方向 

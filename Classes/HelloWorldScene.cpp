@@ -87,14 +87,16 @@ bool HelloWorld::init()
     //this->addChild(layer3d);
     //Bomb *bomb = Bomb::create();
     //addChild(bomb);
+
+    Cannon *cannon = Cannon::create();
+    addChild(cannon);
+    cannon->setPosition(ccp(400, 240));
     /*
 
     Background *bk = Background::create();
     addChild(bk);
     
-    Cannon *cannon = Cannon::create();
-    addChild(cannon);
-    cannon->setPosition(ccp(400, 240));
+
     */
 
     /*
@@ -166,6 +168,7 @@ bool HelloWorld::init()
     w->setPosition(ccp(650, 200));
     */
 
+    /*
     Smoke *sm = Smoke::create();
     addChild(sm);
     sm->setPosition(ccp(500, 300));
@@ -174,7 +177,7 @@ bool HelloWorld::init()
     BigSmoke *bs = BigSmoke::create();
     addChild(bs);
     bs->setPosition(ccp(300, 300));
-
+    */
     /*
     BrightBall *ball = BrightBall::create();
     addChild(ball);

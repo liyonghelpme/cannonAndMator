@@ -27,16 +27,17 @@ void Bomb::update(float dt) {
 */
 CCParticleSystemQuad *Bomb::bombStart(CCPoint &pos, float dir, float time){
     printf("bombStart\n");
-    CCParticleSystemQuad *p = CCParticleSystemQuad::createWithTotalParticles(40);
+    int total = 10;
+    CCParticleSystemQuad *p = CCParticleSystemQuad::createWithTotalParticles(total);
 
-    p->setEmissionRate(40/0.3);
+    p->setEmissionRate(total/0.3);
     p->setDuration(time);
 
     p->setEmitterMode(kCCParticleModeRadius);
     p->setLife(0.3f);//越小运动越快
     p->setLifeVar(0.1);
     p->setStartSize(20);//根据具体图片
-    p->setStartSizeVar(0);
+    p->setStartSizeVar(5);
     p->setEndSize(0);
     p->setEndSizeVar(0);
 
@@ -228,10 +229,10 @@ CCParticleSystemQuad *Bomb::bombEnd(CCPoint &end) {
 
     p->setEmissionRate(200);//爆炸效果持续的时间
     p->setGravity(ccp(0, 0));
-    p->setSpeed(30);//爆炸效果的速度 跟建筑范围相关 速度越大爆炸范围越大
+    p->setSpeed(0);//爆炸效果的速度 跟建筑范围相关 速度越大爆炸范围越大
 
-    p->setRadialAccel(200);//爆炸最后的喷射速度
-    p->setTangentialAccel(-80);
+    p->setRadialAccel(-0);//爆炸最后的喷射速度
+    p->setTangentialAccel(-0);
 
     p->setAngle(90);
     p->setAngleVar(360);
