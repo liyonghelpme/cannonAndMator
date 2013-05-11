@@ -20,6 +20,7 @@
 #include "Smoke.h"
 #include "BigSmoke.h"
 #include "BrightBall.h"
+#include "MyStrokeFont.h"
 
 //#include "Range.h"
 
@@ -184,6 +185,13 @@ bool HelloWorld::init()
     ball->setPosition(ccp(200, 300));
     */
 
+    //需要初始化stroke 信息 通过create
+    CCLabelTTF *label = CCLabelTTF::create("Hello World", "Arial", 22);
+    CCRenderTexture *rt = MyStrokeFont::createStroke(label, 2, ccc3(15, 15, 15));
+    label->addChild(rt, -1);
+    label->setPosition(ccp(200, 200));
+
+    addChild(label);
 
     return true;
 }

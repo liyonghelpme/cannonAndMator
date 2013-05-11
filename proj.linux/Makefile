@@ -47,6 +47,7 @@ OBJECTS = ./main.o \
 		../Classes/Smoke.o \
 		../Classes/BigSmoke.o \
 		../Classes/BrightBall.o \
+		../Classes/MyStrokeFont.o \
 
 
 LBITS := $(shell getconf LONG_BIT)
