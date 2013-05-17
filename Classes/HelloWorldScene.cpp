@@ -59,7 +59,7 @@ bool HelloWorld::init()
     //resourceSize / designSize
     CCDirector::sharedDirector()->setContentScaleFactor(1.0);
     //DesignResolution
-    CCDirector::sharedDirector()->getOpenGLView()->setDesignResolutionSize(800, 480, kResolutionExactFit);
+    CCDirector::sharedDirector()->getOpenGLView()->setDesignResolutionSize(1024, 700, kResolutionExactFit);
     
     CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
     CCPoint origin = CCDirector::sharedDirector()->getVisibleOrigin();
@@ -186,12 +186,57 @@ bool HelloWorld::init()
     */
 
     //需要初始化stroke 信息 通过create
-    CCLabelTTF *label = CCLabelTTF::create("Hello World", "Arial", 22);
-    CCRenderTexture *rt = MyStrokeFont::createStroke(label, 2, ccc3(15, 15, 15));
-    label->addChild(rt, -1);
-    label->setPosition(ccp(200, 200));
+    int initFont = 13;
+    int initY = 100;
 
-    addChild(label);
+    int num = 30;
+    float *shadowSize = new float[num];
+    for(int i = 0; i < num; i++) {
+        shadowSize[i] = 2.6f;     
+    }
+    
+    shadowSize[13-initFont] = 1.5; 
+    shadowSize[14-initFont] = 1.5; 
+    shadowSize[15-initFont] = 1.5; 
+    shadowSize[16-initFont] = 2.0; 
+    shadowSize[17-initFont] = 2.3; 
+
+    int curHeight = 0;
+    for(int i = 0; i < 10; i++) {
+        CCLabelTTF *label = CCLabelTTF::create("建造者 激光 僵尸", "huawen.ttf", initFont+i);
+        CCRenderTexture *rt = MyStrokeFont::createStroke(label, shadowSize[i], ccc3(5, 5, 5));
+        label->addChild(rt, -1);
+        int hei = curHeight;
+        label->setPosition(ccp(100, initY+hei));
+        addChild(label);
+        curHeight += label->getContentSize().height+10;
+    }
+
+    curHeight = 0;
+    for(int i = 0; i < 10; i++) {
+        CCLabelTTF *label = CCLabelTTF::create("建造者 激光 僵尸", "huawen.ttf", initFont+10+i);
+        CCRenderTexture *rt = MyStrokeFont::createStroke(label, shadowSize[i+10], ccc3(5, 5, 5));
+        label->addChild(rt, -1);
+        int hei = curHeight;
+        label->setPosition(ccp(300, initY+hei));
+        addChild(label);
+        curHeight += label->getContentSize().height+5;
+    }
+
+    curHeight = 0;
+    for(int i = 0; i < 10; i++) {
+        CCLabelTTF *label = CCLabelTTF::create("建造者 激光 僵尸", "huawen.ttf", initFont+10+10+i);
+        CCRenderTexture *rt = MyStrokeFont::createStroke(label, shadowSize[i+10+10], ccc3(5, 5, 5));
+        label->addChild(rt, -1);
+        int hei = curHeight;
+        label->setPosition(ccp(600, initY+hei));
+        addChild(label);
+        curHeight += label->getContentSize().height+5;
+    }
+
+    
+
+
 
     return true;
 }

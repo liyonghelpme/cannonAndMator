@@ -33,6 +33,8 @@ CCRenderTexture *MyStrokeFont::createStroke(CCLabelTTF *label, float size, ccCol
     label->setColor(cor);
     label->setScale(1);
     label->setVisible(true);
+    //当前要放上去的阴影 使用阴影自身的alpha值来乘 SRC_ALPHA
+    //已经放到纹理中的阴影 使用GL_ONE 保留阴影
     label->setBlendFunc((ccBlendFunc){GL_SRC_ALPHA, GL_ONE});
 
 
@@ -41,7 +43,16 @@ CCRenderTexture *MyStrokeFont::createStroke(CCLabelTTF *label, float size, ccCol
                                 cs.height*label->getAnchorPoint().y+size);
     CCPoint positionOffset = ccp(label->getContentSize().width/2, label->getContentSize().height/2);
     rt->begin();
-    for(int i = 0; i < 360; i += 45) {
+    for(int i = 0; i < 360; i += 10) {
+        /*
+        for(int j = 0; j < size; j++) {
+            label->setPosition(ccp(
+                            bottomLeft.x+sin(CC_DEGREES_TO_RADIANS(i))*j, 
+                            bottomLeft.y+cos(CC_DEGREES_TO_RADIANS(i))*j));
+            label->visit();
+        }
+        */
+
         label->setPosition(ccp(
                         bottomLeft.x+sin(CC_DEGREES_TO_RADIANS(i))*size, 
                         bottomLeft.y+cos(CC_DEGREES_TO_RADIANS(i))*size));
